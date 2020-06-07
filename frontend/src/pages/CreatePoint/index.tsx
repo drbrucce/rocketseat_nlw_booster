@@ -6,6 +6,8 @@ import axios from 'axios'
 import { LeafletMouseEvent } from 'leaflet'
 import './styles.css'
 import { useHistory } from 'react-router-dom'
+import Dropzone from '../../components/DropZone'
+
 
 interface Item {
     id: number,
@@ -38,6 +40,7 @@ const CreatePoint = ()=>{
     const [selectedUF, setSelectedUF] = useState<string>('0')
     const [selectedCity, setSelectedCity] = useState<string>('0')
     const [selectedItems, setSelectedItems] = useState<number[]>([])
+    const [selectedFile, setSelectedFile] = useState<File>()
     
 
     useEffect(()=>{
@@ -45,6 +48,7 @@ const CreatePoint = ()=>{
             const { latitude, longitude } = position.coords
 
             setInitialPosition([latitude, longitude])
+            setMarkPosition([latitude, longitude])
         })
     }, [])
 
@@ -101,22 +105,23 @@ const CreatePoint = ()=>{
         const uf = selectedUF
         const [latitude, longitude] = markerPosition
         const items = selectedItems
-        const image = 'fakeimg'
+        const image = selectedFile
 
-        const data = { 
-            name, 
-            email, 
-            whatsapp, 
-            city,
-            uf,
-            latitude, 
-            longitude,
-            image,
-            address, 
-            number,
-            zipcode,
-            items
-        }
+        const data = new FormData() 
+        data.append('name', name) 
+        data.append('email', email) 
+        data.append('whatsapp', whatsapp) 
+        data.append('city', city)
+        data.append('uf', uf)
+        data.append('latitude', String(latitude)) 
+        data.append('longitude', String(longitude))
+        data.append('address', address) 
+        data.append('number', String(number))
+        data.append('zipcode', zipcode)
+        data.append('items', items.join(','))
+        if(image)
+            data.append('image', image)
+
 
         api.post('points', data)
             .then(response => history.push('/completed'))
@@ -137,6 +142,7 @@ const CreatePoint = ()=>{
             <form onSubmit={handleSubmit}>
                 <h1>Cadastro do <br/> ponto de coleta</h1>
 
+                <Dropzone onFileUploaded={setSelectedFile} />
                 <fieldset>
                     <legend>
                         <h2>Dados</h2>

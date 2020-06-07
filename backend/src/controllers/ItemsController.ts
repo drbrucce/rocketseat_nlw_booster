@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import config from '../config'
+import config from '../configs/config'
 import knex from '../database/connection'
 
 class ItemsController{

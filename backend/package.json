@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "npx ts-node-dev --ignore-watch node_modules src/server.ts",
     "knex:migrate": "knex migrate:latest --knexfile knexfile.ts",
+    "knex:rollbackall": "knex migrate:rollback --knexfile knexfile.ts",
     "knex:migration": "knex migrate:make -x ts --knexfile knexfile.ts",
     "knex:seedcreate": "knex seed:make --knexfile knexfile.ts",
     "knex:seed": "knex seed:run --knexfile knexfile.ts"
@@ -14,14 +15,18 @@
   "author": "Gustavo Rocha dos Santos",
   "license": "ISC",
   "dependencies": {
+    "celebrate": "^12.1.1",
     "cors": "^2.8.5",
     "express": "^4.17.1",
     "knex": "^0.21.1",
+    "multer": "^1.4.2",
     "sqlite3": "^4.2.0"
   },
   "devDependencies": {
     "@types/cors": "^2.8.6",
     "@types/express": "^4.17.6",
+    "@types/hapi__joi": "^17.1.2",
+    "@types/multer": "^1.4.3",
     "ts-node": "^8.10.2",
     "ts-node-dev": "^1.0.0-pre.44",
     "typescript": "^3.9.3"

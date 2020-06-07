@@ -50,7 +50,9 @@ const Points = ()=>{
 
   useEffect(()=>{ 
     api.get('items').then(response=>{
+      console.log(response)
       setItems(response.data)
+      console.log(items)
     })
 
   }, [])
