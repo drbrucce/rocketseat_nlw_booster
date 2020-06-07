@@ -14,6 +14,9 @@
 #database
 /src/database/database.sqlite
 
+#uploads
+/uploads
+
 # misc
 .DS_Store
 .env.local
