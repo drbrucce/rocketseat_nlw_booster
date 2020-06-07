@@ -21,7 +21,7 @@ class PointsController{
             
         query.distinct()
             .select('points.*')
-            
+console.log(query)
         await query
             .then(point=>res.json(point))
             .catch(err => res.status(400).json({message:err}))

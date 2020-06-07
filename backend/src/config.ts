@@ -1,5 +1,5 @@
 const config = {
-    server:"localhost",
+    server:"192.168.0.3",
     port:3333,
     staticFiles:"uploads",
 }

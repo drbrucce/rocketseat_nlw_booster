@@ -17,5 +17,5 @@ server.use(`/${config.staticFiles}`, express.static(path.resolve(__dirname, '..'
 
 
 server.listen(config.port, config.server, ()=>{
-    console.log(`Server on http://localhost:${config.port}`)
+    console.log(`Server on http://${config.server}:${config.port}`)
 })
